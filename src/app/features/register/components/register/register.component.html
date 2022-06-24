@@ -1,0 +1,69 @@
+<section class="register-page">
+  <div class="header">
+    <h1>Register your account</h1>
+  </div>
+
+  <form [formGroup]="form" class="form-container" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter Username</mat-label>
+      <input
+        matInput
+        placeholder="username"
+        formControlName="username"
+        required
+      />
+
+      <mat-error>{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="ShibaInu@example.com"
+        formControlName="email"
+        required
+      />
+
+      <mat-error>{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        placeholder="password"
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+        required
+      />
+      <mat-icon matSuffix (click)="hide = !hide">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
+
+      <mat-error>{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm password</mat-label>
+      <input
+        matInput
+        placeholder="confirmm password"
+        [type]="hide ? 'password' : 'text'"
+        formControlName="passwordConfirmation"
+        required
+      />
+      <mat-icon matSuffix (click)="hide = !hide">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
+
+      <mat-error>{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+
+    <div *ngIf="form.value['passwordConfirmation'] !== form.value['password']">
+      {{ getErrorMessage() }}
+    </div>
+
+    <button mat-raised-button color="accent" type="submit">Register</button>
+  </form>
+</section>

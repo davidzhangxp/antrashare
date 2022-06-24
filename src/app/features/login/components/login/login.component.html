@@ -1,0 +1,71 @@
+<section class="login-page">
+  <div class="header">
+    <h1>Log In</h1>
+  </div>
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <img [src]="imageUrl" alt="antrashare" />
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>User Email:</mat-label>
+        <input
+          matInput
+          placeholder="User Email"
+          formControlName="userEmail"
+          required
+        />
+        <mat-error *ngIf="form.controls['userEmail'].errors?.['required']"
+          >Email is required</mat-error
+        >
+
+        <mat-error *ngIf="form.controls['userEmail'].errors?.['email']">
+          Your Email format is incorrect</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Password:</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          required
+        />
+        <mat-error *ngIf="form.controls['password'].errors?.['required']"
+          >Password is required</mat-error
+        >
+        <mat-error *ngIf="form.controls['password'].errors?.['minlength']"
+          >You need at least 5 letters password</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div id="form-footer">
+      <div>
+        <mat-checkbox formControlName="agreement">Agreement</mat-checkbox>
+      </div>
+
+      <div><a>Need Help?</a></div>
+    </div>
+
+    <div>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="!form.value.agreement || form.invalid"
+      >
+        Log In
+      </button>
+    </div>
+
+    <div id="linkToRegister">
+      <a routerLink="/register">No Account? Register Now!</a>
+    </div>
+    <div>
+      {{ errorMessage }}
+    </div>
+  </form>
+</section>

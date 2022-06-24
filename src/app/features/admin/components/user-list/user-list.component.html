@@ -1,0 +1,15 @@
+<div class="userlist">
+  <ul>
+    <li class="list_items" *ngFor="let user of userList" appHighlight>
+      <div class="user_tag" (click)="passUsername(user)">
+        {{ user.userName }}
+      </div>
+      <div class="del-btn" (click)="delete(user)">
+        <mat-icon>delete</mat-icon>
+      </div>
+    </li>
+  </ul>
+  <div class="add-button">
+    <button mat-raised-button color="primary">Add User</button>
+  </div>
+</div>
