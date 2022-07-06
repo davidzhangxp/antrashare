@@ -13,7 +13,10 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   formElements = {
     userEmail: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(5)]],
+    password: [
+      '',
+      [Validators.required, Validators.minLength(5), Validators.maxLength(25)],
+    ],
     agreement: false,
   };
   imageUrl = '../assets/BroCode.jpeg';

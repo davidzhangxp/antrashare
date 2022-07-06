@@ -11,7 +11,8 @@ import { AdminModule } from './features/admin/admin.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './core/interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,13 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

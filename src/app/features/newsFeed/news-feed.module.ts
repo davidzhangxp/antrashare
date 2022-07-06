@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommentFormComponent } from './components/news-feed/post-list/comment/comment-form/comment-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     PostListComponent,
     CommentComponent,
     CommentFormComponent,
+    TruncatePipe,
   ],
   imports: [
     CommonModule,

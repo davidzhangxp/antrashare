@@ -11,6 +11,8 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { RegisterService } from '../../register.service';
 
 @Component({
@@ -31,6 +33,14 @@ export class RegisterComponent implements OnInit {
   });
 
   hide = true;
+  isSaved: boolean = true;
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.isSaved) {
+      const result = window.confirm('there is an unsaved change!');
+      return of(result);
+    }
+    return true;
+  }
 
   constructor(
     private router: Router,
@@ -79,16 +89,21 @@ export interface User {
 
 export function startWithUpperCase(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    if (control.value !== 3) {
+    if (
+      control.value &&
+      control.value.charAt(0) !== control.value.charAt(0).toUpperCase()
+    ) {
       return { startwithuppercase: true };
     } else {
-      return { startwithuppercase: true };
+      return null;
     }
   };
 }
 export function forbiddenNameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const forbidden = control.value;
-    return forbidden ? { forbiddenName: { value: control.value } } : null;
+    return forbidden === 'bob'
+      ? { forbiddenName: { value: control.value } }
+      : null;
   };
 }

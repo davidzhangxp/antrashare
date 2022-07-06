@@ -82,6 +82,13 @@ export class CommentComponent implements OnInit, AfterViewInit {
       .addComment(newComment, this.story?._id)
       .subscribe((res) => {
         console.log(res);
+
+        this.loadPageData(
+          this.story?.comment,
+          this.paginator!.pageIndex,
+          this.paginator!.pageSize
+        );
+        console.log(this.story?.comment);
       });
   }
 
